@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block content %}
+<h1 class="mb-5 text-center">{{question.question_text}}</h1>
+
+<ul class="list-group mb-5">
+  {% for choice in question.choice_set.all %}
+
+  <li class="list-group-item">
+    {{choice.choice_text}}
+    <span class="badge bg-success float-end">
+      {{choice.votes}} vote{{choice.votes | pluralize}}
+    </span>
+  </li>
+
+  {% endfor %}
+</ul>
+<div class="d-grid gap-2 col-12 d-md-block">
+    
+    <a href="{% url 'polls:index' %}" class="btn btn-secondary col-12">Back to Polls</a>
+    <a href="{% url 'polls:detail' question.id %}" class="btn btn-dark col-12"
+      >Vote Again?</a
+    >
+</div>
+
+{% endblock content %}
